@@ -1,16 +1,24 @@
-from flask import Flask
-app = Flask(__name__)
+from flask import Flask, request
+from  flask_cors import CORS, cross_origin
 from controllers import trafficAccidents
 
+
+app = Flask(__name__)
+
+CORS(app, resources={r"/*": {"origins": ""}}, methods=["GET", "POST"],
+allow_headers=["content-type"])
+
 injured_data = trafficAccidents.load_injured_data()
-deceased_data = trafficAccidents.load_deceased_data()
 
-@app.route('/')
+@app.route('/get_map_data', methods=["POST", "OPTIONS"])
+@cross_origin()
 def hello():
-    labels, data = trafficAccidents.prepare_data_for_bar(injured_data)
-    return {'labels': labels, 'data': data}
+    if request.method == "POST":
+        data = request.get_json(force=true)
+        result = trafficAccidents.prepare_data_for_map(injured_data, data("Year"))
+        return result
+  
 
-app.run(debug=True)
 
-if __name__ == "__main__":
-    app.run()
+if  __name__ == '__main__':
+    app.run(debug=True)
