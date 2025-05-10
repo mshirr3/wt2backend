@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from  flask_cors import CORS, cross_origin
 from controllers import trafficAccidents
 
@@ -12,11 +12,11 @@ injured_data = trafficAccidents.load_injured_data()
 
 @app.route('/get_map_data', methods=["POST", "OPTIONS"])
 @cross_origin()
-def hello():
+def get_map_data():
     if request.method == "POST":
-        data = request.get_json(force=true)
-        result = trafficAccidents.prepare_data_for_map(injured_data, data("Year"))
-        return result
+        data = request.get_json(force=True)
+        result = trafficAccidents.prepare_data_for_map(injured_data, data["Year"])
+        return jsonify(result)
   
 
 
