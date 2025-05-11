@@ -23,7 +23,17 @@ export class injuresDataController {
         return injuryData  
         } catch (err) {
             console.error('Error fetching data: ', err)
-        }
-        
+        }   
+    }
+
+    // trasnforms eg. 'Stockholms län' from backend to 'stockholm'
+    sliceLastLetters (string) {
+      const slicedString = str.slice(0,str.length -4)
+      const isItAnS = slicedString.slice(slicedString.length - 1 , slicedString.length + 1)
+      if ( isItAnS == 's') {
+        return string.slice(0,str.length - 5)
+        } else {
+            return string.slice(0,str.length - 4)
+      }
     }
 }
