@@ -27,17 +27,10 @@ fetch('https://raw.githubusercontent.com/okfse/sweden-geojson/refs/heads/master/
 
     // Add new layer
     window.countyLayer = L.geoJson(geojsonData, {
-        style: (feature) => stylesController.style(feature, mapData),
+        style: (feature) => stylesController.style(injuriesController.getFixedCountyName(feature.properties.name, mapData), mapData),
         onEachFeature: (feature, layer) => {
             const county = feature.properties.name;
-            let value
-            if (mapData[`${county} län`] == undefined) {
-              value = mapData[`${county}s län`]
-            } else {
-              value = mapData[`${county} län`] || 0;
-            }
-            
-            console.log("county & mapData", county, value)
+            const value = mapData[injuriesController.getFixedCountyName(county, mapData)]
             layer.bindPopup(`<strong>${county}</strong><br>Injuries: ${value}`);
         }
     }).addTo(map);

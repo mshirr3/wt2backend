@@ -2,18 +2,15 @@
 
 export class StylesController {
     // colors based on injuries
-    #getColor (d) {
-        return d > 5000 ? '#800026' :
-               d > 2000 ? '#BD0026' :
-               d > 1000 ? '#E31A1C' :
-               d > 500  ? '#FC4E2A' :
-               d > 100  ? '#FD8D3C' :
-               d > 0    ? '#FEB24C' :
-                          '#FFEDA0';
-      }
-
-    style (feature, mapData) {
-        const county = feature.properties.name
+    #getColor(d) {
+        return d > 5000 ? '#7f0000' :   // very dark red
+               d > 3000 ? '#b30000' :   // deep red
+               d > 2000 ? '#d7301f' :   // red-orange
+               d > 1000 ? '#fc8d59' :   // orange
+               d > 500  ? '#fdbb84' :   // light orange
+                          '#ffffb2';    // bright yellow
+    }
+    style (county, mapData) {
         const value = mapData[county] || 0
         return {
             fillColor: this.#getColor(value),

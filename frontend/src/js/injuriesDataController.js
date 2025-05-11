@@ -26,14 +26,18 @@ export class injuresDataController {
         }   
     }
 
-    // trasnforms eg. 'Stockholms län' from backend to 'stockholm'
-    sliceLastLetters (string) {
-      const slicedString = str.slice(0,str.length -4)
-      const isItAnS = slicedString.slice(slicedString.length - 1 , slicedString.length + 1)
-      if ( isItAnS == 's') {
-        return string.slice(0,str.length - 5)
+    // trasnforms eg. 'Stockholm' from geojson to 'stockholms län' for backend data
+    getFixedCountyName (county, mapData) {
+        let correctCounty
+
+        if (mapData[`${county} län`] == undefined) {
+          correctCounty = `${county}s län`
+          console.log("if", county)
+          return correctCounty
         } else {
-            return string.slice(0,str.length - 4)
-      }
+          correctCounty = `${county} län`
+          console.log("else get fixed countynae", correctCounty)
+          return correctCounty
+        }
     }
 }
