@@ -4,7 +4,7 @@ export class injuresDataController {
     async getData(year) {
         try {
           parseInt(year)
-          const response = await fetch('https://wt2backend.onrender.com', {
+          const response = await fetch('https://wt2backend.onrender.com/get_map_data', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ Year: year })
