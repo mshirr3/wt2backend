@@ -5,7 +5,7 @@ from controllers import trafficAccidents
 
 app = Flask(__name__)
 
-CORS(app, resources={r"/*": {"origins": "*"}})  # alla origins tillåts
+CORS(app, resources={r"/*": {"origins": "*"}}, methods=["GET", "POST", "OPTIONS"], allow_headers=["Content-Type"])  # alla origins tillåts
 
 injured_data = trafficAccidents.load_injured_data()
 
