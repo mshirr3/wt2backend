@@ -32,11 +32,9 @@ export class injuresDataController {
 
         if (mapData[`${county} län`] == undefined) {
           correctCounty = `${county}s län`
-          console.log("if", county)
           return correctCounty
         } else {
           correctCounty = `${county} län`
-          console.log("else get fixed countynae", correctCounty)
           return correctCounty
         }
     }

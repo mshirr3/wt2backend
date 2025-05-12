@@ -6,6 +6,11 @@ const injuriesController = new injuresDataController()
 // L for leaflet in global scope, create a map inside map div, setview with longitude and altitude
 const map = L.map('map').setView([63.0, 16.0], 5)
 
+// base tile from openstreetmap api
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: 'Map data © OpenStreetMap contributors'
+}).addTo(map);
+
 let geojsonData 
 // loading the geojson file remotely in raw geojson
 fetch('https://raw.githubusercontent.com/okfse/sweden-geojson/refs/heads/master/swedish_regions.geojson')
